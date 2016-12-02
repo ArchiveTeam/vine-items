@@ -27,6 +27,7 @@ function expand_line_into_user_document(line)
 
 	doc["_id"] = line	
 	doc["profile_url"] = "https://vine.co/u/"..user_id
+	doc["created_at"] = os.date("!%Y-%m-%dT%TZ")
 
 	return doc
 end
