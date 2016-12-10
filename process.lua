@@ -32,11 +32,24 @@ function expand_line_into_user_document(line)
 	return doc
 end
 
+function expand_line_into_tag_document(line)
+	local tag = line:sub(5, -1)
+	local doc = {}
+
+	doc["_id"] = line	
+	doc["tag_url"] = "https://vine.co/tags/"..tag
+	doc["created_at"] = os.date("!%Y-%m-%dT%TZ")
+
+	return doc
+end
+
 function expand_line_into_document(line)
 	if string.find(line, "video:") then
 		return expand_line_into_video_document(line)
 	elseif string.find(line, "user:") then
 		return expand_line_into_user_document(line)
+	elseif string.find(line, "tag:") then
+		return expand_line_into_tag_document(line)
 	else
 		error("cannot handle line "..line)
 	end
